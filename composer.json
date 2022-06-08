@@ -12,7 +12,6 @@
             "name": "Adorncommerce"
         }
     ],
-    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "files": [
