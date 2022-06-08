@@ -1,11 +1,11 @@
-{
+[
   "name": "adorncommerce",
   "author": "Magento Commerce Inc.",
   "description": "Magento2 node modules dependencies for local development",
   "license": "(OSL-3.0 OR AFL-3.0)",
-  "repository": {
+  "repository": [
     "type": "git",
     "url": "https://github.com/mitraj-adorncommerce/review.git"
-  },
+  ],
   "homepage": "https://magento.com/"
-}
+]
