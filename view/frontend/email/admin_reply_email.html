@@ -1,0 +1,22 @@
+<!--@subject {{var store.getFrontendName()}}: {{trans "Thanks for review"}} @-->
+<!--@vars {
+"var customer_name":"customer name",
+"var customer_review":"customer review",
+"var title":"Title",
+"var admin_reply":"customer review",
+"var review_status":"review status"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+<p style="font-weight:700">{{trans "Dear %customer_name," customer_name=$customer_name()}}</p>
+<p style="font-weight: 600;font-size: 1.8rem;margin-bottom: 10px;">{{trans "%title," title=$title()}}</p>
+<p>{{trans "%customer_review," customer_review=$customer_review()}}</p>
+<p><span>{{trans "Review Status : "}}</span><span style="font-weight: 600;">{{trans "%review_status" review_status=$review_status()}}<span></span></p>
+<div style="margin-left: 35px">
+    <p style="font-weight: 600;font-size: 1.8rem;margin-bottom: 10px;">
+        Owner Reply
+    </p>
+    <p>{{trans "%admin_reply," admin_reply=$admin_reply()}}</p>
+</div>
+<strong>Thanks, {{var store.getFrontendName()}}</strong>
+{{template config_path="design/email/footer_template"}}

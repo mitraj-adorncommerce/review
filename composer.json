@@ -1,0 +1,25 @@
+{
+    "name": "adorncommerce/module-advance-product-review-rating",
+    "description": "",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "email": "info@adorncommerce.com",
+            "name": "Adorncommerce"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Adorncommerce\\ProductReviewRating\\": ""
+        }
+    }
+}

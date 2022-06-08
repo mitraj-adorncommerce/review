@@ -1,0 +1,27 @@
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+
+$review = $block->getReviewData();
+?>
+<?php if ($block->getReviewData()): ?>
+    <?php
+    $images = json_decode($review->getImage());
+    ?>
+<?php if ($images):?>
+    <?php foreach ($images as $img){ ?>
+    <div class="image item base-image" data-role="image">
+        <div class="product-image-wrapper">
+            <img class="product-image" data-role="image-element" src="<?php echo $block->getReviewMediaUrl() . $img; ?>" alt="">
+            <div class="actions">
+                <button type="button" class="action-remove" media-id="<?php echo $review->getPrimaryId(); ?>"
+                        data-role="delete-button" title="Delete image">
+                    <span>Delete image</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+<?php endif; ?>
+<?php else: ?>
+    <?= $block->escapeHtml(__("No images available.")) ?>
+<?php endif; ?>

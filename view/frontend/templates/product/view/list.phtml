@@ -1,0 +1,196 @@
+<?php
+
+/**
+ * Copyright 2020 Adorncommerce LLP. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var Magento\Review\Block\Product\View\ListView $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+$helper = $this->helper('Adorncommerce\ProductReviewRating\Helper\Data');
+$review_image = $helper->getImages($block->getProductId());
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+$voteAvg = 0;
+$directoryPath = $this->getUrl('pub/media/product_review_image');
+?>
+<link rel='stylesheet' href='https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css'>
+<link rel="stylesheet" type="text/css"
+      href="<?php echo $block->getViewFileUrl('Adorncommerce_ProductReviewRating::css/jquery.rateyo.min.css') ?>">
+<div class="block review-list-adrn" id="customer-reviews">
+    <?php if ($helper->isModuleEnabled()) { ?>
+        <?php echo $this->getLayout()->createBlock("Magento\Review\Block\Product\View\ListView")->setTemplate("Adorncommerce_ProductReviewRating::product/view/review.phtml")->toHtml(); ?>
+        <?php echo $this->getLayout()->createBlock("Magento\Review\Block\Product\View\ListView")->setTemplate("Adorncommerce_ProductReviewRating::product/view/rating/rating-code.phtml")->toHtml(); ?>
+    <?php } else { ?>
+        <?php if (!$block->getHideTitle()) : ?>
+            <div class="block-title">
+                <strong><?= $block->escapeHtml(__('Customer Reviews')) ?></strong>
+            </div>
+        <?php endif ?>
+    <?php } ?>
+    <?php if (count($_items)) : ?>
+    <div class="block-content">
+        <div class="toolbar review-toolbar">
+            <?= $block->getChildHtml('toolbar') ?>
+        </div>
+        <ol class="items review-items">
+            <?php if ($review_image):?>
+            <div class="all-review-images">
+                <ul id="lightgallery" class="all-review-grid">
+                    <?php foreach ($review_image as $img){?>
+                    <li data-src="https://sachinchoolur.github.io/lightgallery.js/static/img/1-1600.jpg">
+                        <div class="all-review-photo" style="background-image: url('<?= rtrim($directoryPath, '/') . $img; ?>')">
+                        </div>
+                    </li>
+                    <?php } ?>
+                    <li data-responsive="https://sachinchoolur.github.io/lightgallery.js/static/img/1-375.jpg 375, https://sachinchoolur.github.io/lightgallery.js/static/img/1-480.jpg 480, https://sachinchoolur.github.io/lightgallery.js/static/img/1.jpg 800" data-src="https://sachinchoolur.github.io/lightgallery.js/static/img/1-1600.jpg"
+                        data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
+                        <a href="">
+                            <img class="img-responsive" src="https://sachinchoolur.github.io/lightgallery.js/static/img/thumb-1.jpg">
+                            <div class="demo-gallery-poster">
+                                <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <?php endif ?>
+            <?php foreach ($_items as $_review) : ?>
+                <li class="item review-item">
+                    <div class="adrn-review-title" itemprop="name">
+                        <?= $block->escapeHtml($_review->getTitle()) ?>
+                    </div>
+                    <?php if (count($_review->getRatingVotes())) : ?>
+                        <div class="adrn-review-ratings">
+                            <?php foreach ($_review->getRatingVotes() as $_vote) : ?>
+                                <?php
+                                $voteAvg += $_vote->getValue();
+                                ?>
+                            <?php endforeach; ?>
+                            <?php $avg = round((float)$voteAvg / $_review->getRatingVotes()->count(), 1) ?>
+                            <div class="adorn-ration">
+                                <div class="normal-fill-star">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                </div>
+                                <div class="rating-fill-star"
+                                     style="width: <?php echo round((float)($avg * 100) / 5, 2) ?>%;">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 12.705 512 486.59" x="0px" y="0px" xml:space="preserve"
+                                         style="margin-left: 0px;">
+                                            <polygon
+                                                points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 "></polygon>
+                                        </svg>
+                                </div>
+                            </div>
+                            <?php $voteAvg = 0; ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="adrn-review-content" itemprop="description">
+                        <?= /* @noEscape */
+                        nl2br($block->escapeHtml($_review->getDetail())) ?>
+                    </div>
+                    <?php if ($_review->getImage()): ?>
+                        <div class="review-add-photo-box">
+                            <?php $images = json_decode($_review->getImage()); ?>
+                            <?php foreach ($images as $img) { ?>
+                                <div class="added-review-img" style="background-image: url('<?= rtrim($directoryPath, '/') . $img; ?>')"></div>
+                            <?php } ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="adrn-review-details">
+                        <ul class="buyer-review">
+                            <li><span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
+                                <strong class="review-details-value"
+                                        itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                            </li>
+                            <li><span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
+                                <time class="review-details-value" itemprop="datePublished"
+                                      datetime="<?= $block->escapeHtmlAttr($block->formatDate($_review->getCreatedAt(), $format)) ?>">
+                                    <?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?>
+                                </time>
+                            </li>
+                        </ul>
+                        <?php if ($helper->isModuleEnabled()) {
+                            if ($_review->getAdminReply()) {
+                                ?>
+                                <div class="adrn-admin-reply">
+                                    <strong>Admin Reply</strong>
+                                    <p><?php echo $_review->getAdminReply() ?></p>
+                                </div>
+                            <?php }
+                        } ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+        <div class="toolbar review-toolbar">
+            <?= $block->getChildHtml('toolbar') ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script src='https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js'></script>
+<script src='https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js'></script>
+<script src='https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js'></script>
+<script>
+    $("#lightgallery").lightGallery({
+    });
+</script>

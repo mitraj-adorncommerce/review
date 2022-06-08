@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="rating_general_admin_review_email_template"
+              label="Owner Reply E-mail Template"
+              file="admin_review_email.html"
+              type="html"
+              module="Adorncommerce_ProductReviewRating"
+              area="frontend"
+    />
+    <template id="rating_general_admin_reply_email_template"
+              label="Product Review Admin E-mail Template"
+              file="admin_reply_email.html"
+              type="html"
+              module="Adorncommerce_ProductReviewRating"
+              area="frontend"
+    />
+</config>

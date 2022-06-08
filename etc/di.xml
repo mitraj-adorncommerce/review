@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2020 Adorncommerce LLP. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Review\Block\Adminhtml\Edit\Form">
+        <plugin name="edit_admin_reply" type="Adorncommerce\ProductReviewRating\Plugin\Adminhtml\Edit\Form" sortOrder="1" disabled="false"/>
+    </type>
+
+    <type name="\Magento\Review\Block\Adminhtml\Add\Form">
+        <plugin name="add_admin_reply" type="Adorncommerce\ProductReviewRating\Plugin\Adminhtml\Add\Form" sortOrder="1" disabled="false"/>
+    </type>
+
+    <preference for="Magento\Review\Model\ResourceModel\Review\Product\Collection" type="Adorncommerce\ProductReviewRating\Model\ResourceModel\Review\Product\Collection" />
+    <preference for="Magento\Review\Model\ResourceModel\Review\Collection" type="Adorncommerce\ProductReviewRating\Model\ResourceModel\Review\Collection" />
+</config>

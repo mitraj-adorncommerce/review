@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright 2020 Adorncommerce LLP. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var Adorncommerce\ProductReviewRating\Block\Email\ReviewEmail $block */
+
+/** @var \Magento\Review\Model\Review $_review */
+$_review = $block->getReviewsCollection($this->getReviewId());
+?>
+<style>
+    .review-title{
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    .block.review-list ol{
+        list-style: none;
+    }
+</style>
+<?php if ($_review): ?>
+    <div class="block review-list" id="customer-reviews">
+        <div class="block-content">
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+            <ol class="items review-items">
+                    <?php if ($_review->getReviewId() == $this->getReviewId()): ?>
+                        <div class="review-details">
+                            <p class="review-date">
+                                <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
+                                <time class="review-details-value"
+                                      itemprop="datePublished"
+                                      datetime="<?= $block->escapeHtmlAttr($block->formatDate(
+    $_review->getCreatedAt()
+)) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt())) ?>
+                                </time>
+                            </p>
+                            <p class="review-author">
+                                <span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
+                                <strong class="review-details-value"
+                                        itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                            </p>
+                        </div>
+                        <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                            <div class="review-title"
+                                 itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
+                            <div class="review-content" itemprop="description">
+                                <?= /* @noEscape */nl2br($block->escapeHtml($_review->getDetail())) ?>
+                            </div>
+
+                        </li>
+                    <?php endif; ?>
+            </ol>
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>

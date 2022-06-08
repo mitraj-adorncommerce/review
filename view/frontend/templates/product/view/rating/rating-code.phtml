@@ -1,0 +1,39 @@
+<?php
+/**
+ * Copyright 2020 Adorncommerce LLP. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+/** @var Magento\Review\Block\Product\View\ListView $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+$helper = $this->helper('Adorncommerce\ProductReviewRating\Helper\Data');
+$reviewBlock = $block->getLayout()->createBlock('Adorncommerce\ProductReviewRating\Block\Ratings');
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+$allStar = $reviewBlock->getAllStart($block->getProductId(), $_items);
+?>
+<?php if ($helper->getGraphicCircle()) : ?>
+<div class="round-rating">
+    <?php foreach ($allStar as $key => $value): ?>
+    <div class="round-rating-item">
+        <div class="progress <?= $reviewBlock->getClass($value['percent']) ?>"
+             data-percentage="<?= $block->escapeHtml($value['percent']) ?>">
+                        <span class="progress-left">
+                            <span class="progress-bar"></span>
+                        </span>
+            <span class="progress-right">
+                            <span class="progress-bar"></span>
+                        </span>
+            <div class="progress-value">
+                <div>
+                    <?= $block->escapeHtml($value['average']); ?>
+                </div>
+            </div>
+        </div>
+        <h5><?= $block->escapeHtml($key) ?></h5>
+    </div>
+    <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+</div><!--/main rating box  -->
+
+

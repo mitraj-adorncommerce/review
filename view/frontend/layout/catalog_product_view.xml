@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2020 Adorncommerce LLP. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="review_product_form_component"/>
+    <body>
+        <referenceBlock name="product.review.form">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper" helper="Adorncommerce\ProductReviewRating\Helper\Data::getFormTemplate"/>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="reviews.tab">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper" helper="Adorncommerce\ProductReviewRating\Helper\Data::getReviewTemplate"/>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

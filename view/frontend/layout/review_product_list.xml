@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2020 Adorncommerce LLP. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Adorncommerce_ProductReviewRating::css/jquery.rateyo.min.css"/>
+        <link src="Adorncommerce_ProductReviewRating::js/modal_overlay.js"/>
+        <css src="Adorncommerce_ProductReviewRating::css/lightgallery.min.css"/>
+    </head>
+
+    <body>
+        <referenceBlock name="product.info.product_additional_data">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper"
+                          helper="Adorncommerce\ProductReviewRating\Helper\Data::getTemplate"/>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

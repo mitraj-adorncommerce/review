@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2020 Adorncommerce LLP. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <rating>
+            <general>
+                <enable>1</enable>
+                <star_color_option>#ff5501</star_color_option>
+                <graphic_circle>1</graphic_circle>
+                <review_email_send_identity>general</review_email_send_identity>
+                <admin_review_email_template>rating_general_admin_review_email_template</admin_review_email_template>
+                <admin_reply_email_template>rating_general_admin_reply_email_template</admin_reply_email_template>
+                <popup>1</popup>
+            </general>
+        </rating>
+    </default>
+</config>

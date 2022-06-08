@@ -1,0 +1,108 @@
+<?php
+/**
+ * Copyright 2020 Adorncommerce LLP. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var Magento\Review\Block\Product\View\ListView $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+$reviewBlock = $block->getLayout()->createBlock('Adorncommerce\ProductReviewRating\Block\ProductReviews');
+$helper = $this->helper('Adorncommerce\ProductReviewRating\Helper\Data');
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+$allStar = $reviewBlock->getAllStart($block->getProductId());
+?>
+<style>
+    .adorn-ration .rating-fill-star svg {
+        fill: <?php echo $helper->getColorCode(); ?> !important;
+    }
+
+    .review-control-vote label:before {
+        color: <?php echo $helper->getColorCode(); ?> !important;
+    }
+</style>
+<button name="write-a-review" id="write-a-review"
+        class="action primary review-btn"><?= $block->escapeHtml(__('Write a Review')); ?></button>
+<?php if (!$block->getHideTitle()): ?>
+    <div class="adrn-block-title">
+        <strong><?= $block->escapeHtml(__('Reviews & Rating')) ?></strong>
+    </div>
+<?php endif ?>
+<div class="main-rating-box"><!--/ this div close in rating\rating-code.phtml  -->
+    <div class="rectangle-rating">
+        <?php echo "<ul class='rating-box'>";
+        foreach ($allStar as $key => $star) { ?>
+            <li>
+                <div class="rating-summary item"
+                     itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                    <span><?= $block->escapeHtmlAttr($key) ?></span>
+                    <span class="rate-star">&#9733;</span>
+                    <?php if(count($_items)):
+                        $percent = round((float)($star['value'] * 100) / count($_items));
+                    else:
+                    $percent = 0;
+                    endif;?>
+                    <div class="rating-result <?= $reviewBlock->getClass($percent); ?>"
+                         title="<?= $block->escapeHtmlAttr($percent) ?>%">
+                        <meta itemprop="worstRating" content="1"/>
+                        <meta itemprop="bestRating" content="100"/>
+                        <span style="width:<?= $block->escapeHtmlAttr($percent) ?>%">
+                                <span
+                                    itemprop="ratingValue"><?= $block->escapeHtml($percent) ?>%</span>
+                            </span>
+                    </div>
+                    <span class="user-count"><?php echo $star['value'] ?></span>
+                </div>
+            </li>
+            <?php
+        }
+        echo "</ul>" ?>
+
+        <div class="rate">
+            <div class="rating-review">
+                <div class="total-avg">
+                    <h3 class="rating-avg">
+                        <?= $average = $block->escapeHtml(round($reviewBlock->getAverage($block->getProductId()), 1)) ?>
+                        /5
+                    </h3>
+                    <div class="total-review">
+                        <div class="rating" style="display: inline-block"></div>
+                        <div id="progressbar"></div>
+                        <span class="total-count-review">Total <?php echo count($_items) ?> reviews</span>
+                    </div>
+                </div>
+                <div class="total-pr">
+                    <span
+                        class="adrn-percent"><?= $block->escapeHtml(round($reviewBlock->getPercentage($block->getProductId()), 0) . '%') ?></span>
+                    <span class="adrn-pr-text">of customers recommended this product</span>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var popup = "<?= $helper->isPopupEnabled() ?>";
+                require([
+                    'jquery',
+                    'rateyo',
+                    'modal_overlay'
+                ], function ($, rate, modal_overlay) {
+                    $("#write-a-review").click(function () {
+                        $(".block.review-add").css("display", "block");
+                        $('html, body').animate({scrollTop: $('.block.review-add').offset().top}, 'slow');
+                    });
+                    $(".rating").rateYo({
+                        rating: <?= $average ?>,
+                        starWidth: '25px',
+                        normalFill: '#d7d7d7',
+                        ratedFill: '<?php echo $helper->getColorCode();?>',
+                        readOnly: true
+                    });
+
+                    $(".tooltip .rating").rateYo({
+                        starWidth: '20px',
+                        normalFill: '#d7d7d7', // light gray
+                        ratedFill: 'black',
+                        fullStar: true
+                    });
+                });
+            </script>
+        </div>
+    </div>

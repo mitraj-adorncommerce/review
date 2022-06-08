@@ -1,0 +1,13 @@
+<!--@subject {{var store.getFrontendName()}}: {{trans "Store has received new review for below product."}} @-->
+<!--@vars {
+"var customer_name":"customer name",
+"var customer_review":"customer review",
+"var title":"Title",
+"var review_id":"Review Id",
+"var product_id":"Product Id"
+} @-->
+{{template config_path="design/email/header_template"}}
+Greetings,
+<p>{{layout handle="reviewrating_email" review_id=$review_id product_id=$product_id area="frontend"}}</p>
+<strong>Thanks, {{var store.getFrontendName()}}</strong>
+{{template config_path="design/email/footer_template"}}

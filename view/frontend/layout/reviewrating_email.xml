@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2020 Adorncommerce LLP. All rights reserved.
+* See LICENSE.txt for license details.
+*/
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Adorncommerce\ProductReviewRating\Block\Email\ReviewEmail" name="review_email" template="Adorncommerce_ProductReviewRating::email/reviewEmail.phtml" cacheable="false" />
+    </body>
+</page>
