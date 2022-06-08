@@ -7,7 +7,5 @@
     "type": "git",
     "url": "https://github.com/mitraj-adorncommerce/review.git"
   },
-  "homepage": "https://magento.com/",
-  "devDependencies": {
-  }
+  "homepage": "https://magento.com/"
 }
